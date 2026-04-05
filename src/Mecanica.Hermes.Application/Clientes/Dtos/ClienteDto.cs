@@ -1,0 +1,10 @@
+namespace Mecanica.Hermes.Application.Clientes.Dtos;
+
+public sealed record ClienteDto(
+    Guid Id,
+    string NomeCivil,
+    string? NomeSocial,
+    string IdentificacaoFiscal,
+    string Email,
+    string Telefone,
+    List<VeiculoDto> Veiculos);

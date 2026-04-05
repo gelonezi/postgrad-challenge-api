@@ -1,0 +1,38 @@
+using AutoMapper;
+using Mecanica.Hermes.Api.Endpoints.OrdensDeServico.Contracts;
+using Mecanica.Hermes.Api.Presenter;
+using Mecanica.Hermes.Application.OrdensDeServico.Commands.AddProduto;
+using Mecanica.Hermes.Application.OrdensDeServico.Dtos;
+using Mecanica.Hermes.Infrastructure.Settings;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Mecanica.Hermes.Api.Endpoints.OrdensDeServico.Routes;
+
+public static class AddProdutoRoute
+{
+    public static void MapAddProduto(this IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapPost("/{id:guid}/produtos", AddProduto)
+            .WithName("AddProdutoToOrdemDeServico")
+            .Produces<OrdemDeServicoResponse>()
+            .Produces<ApiProblemDetails>(statusCode: StatusCodes.Status400BadRequest)
+            .Produces<ApiProblemDetails>(statusCode: StatusCodes.Status404NotFound)
+            .Produces<ApiProblemDetails>(statusCode: StatusCodes.Status500InternalServerError)
+            .RequireAuthorization(AuthPolicies.OnlyAdminScope)
+            .WithDescription("Adiciona um produto à ordem de serviço");
+    }
+
+    private static async Task<IResult> AddProduto(
+        [FromRoute] Guid id,
+        [FromBody] AddOrdemServicoProdutoRequest request,
+        [FromServices] ISender sender,
+        [FromServices] IMapper mapper,
+        CancellationToken cancellationToken)
+    {
+        var command = new AddProdutoCommand(id, request.ProdutoId, request.Quantidade);
+        var response = await sender.Send(command, cancellationToken);
+
+        return response.Present<OrdemDeServicoDto, OrdemDeServicoResponse>(mapper);
+    }
+}

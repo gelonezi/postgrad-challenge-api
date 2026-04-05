@@ -1,0 +1,31 @@
+root = true
+
+# All files
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Code files
+[*.{cs,csx,vb,vbx}]
+indent_size = 4
+indent_style = space
+
+# Disable SonarAnalyzer rules
+[*.cs]
+
+# S107: Methods should not have too many parameters
+# Justification: Domain entities and value objects often require many parameters for reconstruction
+dotnet_diagnostic.S107.severity = none
+
+# S6444: Regex timeout
+# Justification: Simple regex patterns used in validation don't require timeout
+dotnet_diagnostic.S6444.severity = none
+
+# S1118: Utility classes should not have public constructors
+# Justification: False positive for EF Core DbContext
+dotnet_diagnostic.S1118.severity = none
+
+# S2094: Classes should not be empty
+# Justification: False positive for IEntityTypeConfiguration implementations
+dotnet_diagnostic.S2094.severity = none

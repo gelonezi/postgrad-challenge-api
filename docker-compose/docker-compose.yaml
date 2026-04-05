@@ -1,0 +1,10 @@
+services:
+  postgres:
+    extends:
+      file: ./services/postgres/postgres.yaml
+      service: postgres
+
+  pgadmin:
+    extends:
+      file: ./services/postgres/postgres.yaml
+      service: pgadmin

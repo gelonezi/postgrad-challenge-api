@@ -1,0 +1,19 @@
+services:
+  mailpit:
+    image: axllent/mailpit:v1.28
+    environment:
+      - MP_DATABASE=/data/mailpit.db
+      - MP_MAX_AGE=7d
+      - TZ=America/Sao_Paulo
+      - MP_SMTP_AUTH=postmaster@fiap.com:xFCsMj6a4NWbZgr5
+      - MP_SMTP_AUTH_ALLOW_INSECURE=true
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    volumes:
+      - mailpit:/data
+    healthcheck:
+      test: "wget --spider -q http://localhost:8025/api/v1/info"
+      interval: 2s
+      timeout: 5s
+      retries: 10
