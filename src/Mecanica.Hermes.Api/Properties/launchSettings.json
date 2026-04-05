@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "scalar",
+      "applicationUrl": "http://localhost:5016",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Host=localhost;Port=5432;Database=MecHermeseDB;Username=postgres;Password=teste123A!;Pooling=true;",
+        "MediatR__LicenseKey": "",
+        "AutoMapper__LicenseKey": "",
+        "APP__BASE_URL": "http://localhost:5016",
+        "AUTH__AUTHORITY": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_JQi8ExUDh",
+        "AUTH__ISSUER": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_JQi8ExUDh",
+        "AUTH__CLIENTE_SCOPE": "mechermes-admin/client",
+        "AUTH__ADMIN_SCOPE": "mechermes-admin/admin",
+        "EmailSender__Enabled": "True",
+        "EmailSender__SmtpServer": "smtp.gmail.com",
+        "EmailSender__SmtpPort": "465",
+        "EmailSender__SslRequired": "True",
+        "EmailSender__UserName": "rogeriosoftplan@gmail.com",
+        "EmailSender__Password": "",
+        "EmailSender__SenderInformation__Name": "Mecânica Hermes",
+        "EmailSender__SenderInformation__Address": "rogeriosoftplan@gmail.com"
+      }
+    }
+  }
+}
